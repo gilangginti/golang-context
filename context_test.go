@@ -62,7 +62,8 @@ func TestContextWithCancel(t *testing.T) {
 	fmt.Println("TOTAL GOROUTINES", runtime.NumGoroutine())
 	parent := context.Background()
 	// ctx, cancel := context.WithCancel(parent)
-	ctx, cancel := context.WithTimeout(parent, 5*time.Second) //Simulation Slow
+	// ctx, cancel := context.WithTimeout(parent, 5*time.Second) //Simulation Slow
+	ctx, cancel := context.WithDeadline(parent, time.Now().Add(5*time.Second)) //context with deadline
 	defer cancel()
 
 	destination := CreateCounter(ctx)
